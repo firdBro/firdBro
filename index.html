@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IMBA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+    <div class="header">
+        <h1 style="background-color:pink; padding: 10px;">Арина лучшая❤️</h1>
+    </div>
+    <center>
+        <h1>Гугли By firdBro!</h1>
+        <p style="font-size:12px; background-color: hotpink;">Arina my bestie❤️</p>
+        <form action="https://www.google.com/search" method="get">
+            <input type="text" name="q" size="80" autofocus>
+            <br><br>
+            <input type="submit" value="Поиск">
+        </form>
+        <!-- Меню гамбургер -->
+        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+        <ul class="menu">
+            <li><a href="https://mail.google.com" target="_blank">Mail</a></li>
+            <li><a href="https://www.youtube.com" target="_blank">YouTube</a></li>
+            <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
+            <li><a href="https://www.tiktok.com" target="_blank">TikTok</a></li>
+            <li><a href="https://store.steampowered.com/" target="_blank">Steam</a></li>
+            <li><a href="https://open.spotify.com/" target="_blank">Spotify</a></li>
+        </ul>
+    </center>
+    <!-- Музыка -->
+    <audio id="backgroundMusic1" loop>
+        <source src="music/D1.mp3" type="audio/mp3">
+    </audio>
+    <audio id="backgroundMusic2" loop>
+        <source src="music/D2.mp3" type="audio/mp3">
+    </audio>
+    <audio id="backgroundMusic3" loop>
+        <source src="music/D3.mp3" type="audio/mp3">
+    </audio>
+    <audio id="backgroundMusic4" loop>
+        <source src="music/D4.mp3" type="audio/mp3">
+    </audio>
+    <audio id="backgroundMusic5" loop>
+        <source src="music/D5.mp3" type="audio/mp3">
+    </audio>
+    <audio id="backgroundMusic6" loop>
+        <source src="music/D6.mp3" type="audio/mp3">
+    </audio>
+    <audio id="backgroundMusic7" loop>
+        <source src="music/D7.mp3" type="audio/mp3">
+    </audio>
+    <audio id="backgroundMusic8" loop>
+        <source src="music/D8.mp3" type="audio/mp3">
+    </audio>
+    <audio id="backgroundMusic9" loop>
+        <source src="music/D9.mp3" type="audio/mp3">
+    </audio>
+    <audio id="backgroundMusic10" loop>
+        <source src="music/D10.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Кнопки управления музыкой -->
+    <div id="musicControls">
+        <button onclick="previousTrack()">&#9664; Назад</button>
+        <button onclick="pausePlay()">&#10074;&#10074; Пауза</button>
+        <button onclick="nextTrack()">Вперёд &#9654;</button>
+    </div>
+
+    <!-- Кнопка очистки истории -->
+    <button class="clear-history" onclick="clearHistory()">Очистить историю</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let currentTrackIndex = 0;
+            const tracks = [
+                document.getElementById('backgroundMusic1'),
+                document.getElementById('backgroundMusic2'),
+                document.getElementById('backgroundMusic3'),
+                document.getElementById('backgroundMusic4'),
+                document.getElementById('backgroundMusic5'),
+                document.getElementById('backgroundMusic6'),
+                document.getElementById('backgroundMusic7'),
+                document.getElementById('backgroundMusic8'),
+                document.getElementById('backgroundMusic9'),
+                document.getElementById('backgroundMusic10')
+            ];
+
+            function playMusic(index) {
+                stopAllMusic();
+                currentTrackIndex = index - 1;
+                tracks[currentTrackIndex].play();
+            }
+
+            function stopAllMusic() {
+                tracks.forEach(track => {
+                    track.pause();
+                    track.currentTime = 0;
+                });
+            }
+
+            function pausePlay() {
+                const currentTrack = tracks[currentTrackIndex];
+                if (currentTrack.paused) {
+                    currentTrack.play();
+                } else {
+                    currentTrack.pause();
+                }
+            }
+
+            function previousTrack() {
+                stopAllMusic();
+                currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+                tracks[currentTrackIndex].play();
+            }
+
+            function nextTrack() {
+                stopAllMusic();
+                currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+                tracks[currentTrackIndex].play();
+            }
+
+            function clearHistory() {
+                console.log('История очищена');
+                // Добавь здесь код для очистки истории
+            }
+
+            document.querySelectorAll('#musicControls button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const text = button.textContent.trim();
+                    if (text.includes('Назад')) previousTrack();
+                    if (text.includes('Пауза')) pausePlay();
+                    if (text.includes('Вперёд')) nextTrack();
+                });
+            });
+
+            document.querySelector('.hamburger').addEventListener('click', toggleMenu);
+
+            function toggleMenu() {
+                const menu = document.querySelector('.menu');
+                menu.classList.toggle('active');
+            }
+        });
+    </script>
+</body>
+</html>
